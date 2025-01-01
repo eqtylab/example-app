@@ -14,6 +14,7 @@ function App() {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
+        overflow: "scroll",
       }}
     >
       <AgentPolicyPlane />
