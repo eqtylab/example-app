@@ -12,8 +12,8 @@ const customStyles = `
   }
   
   .wide-modal {
-    max-width: 90vw;
-    width: 90vw;
+    max-width: 98vw;
+    width: 98vw;
     margin: 0 auto;
   }
 `;
@@ -31,7 +31,7 @@ const ModalWrapper = () => (
     contentClassName="transparent-modal"
     backdropClassName="transparent-modal"
   >
-    <Modal.Body style={{ height: "80vh", width: "98vw" }}>
+    <Modal.Body style={{ height: "80vh" }}>
       <AgentPolicyPlane />
     </Modal.Body>
   </Modal>
