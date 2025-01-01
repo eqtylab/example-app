@@ -19,6 +19,8 @@ npm install
 npm link
 ```
 
+Now you will be able to use the component in other local apps.
+
 ## Running this app
 
 (cd into this app's folder)
