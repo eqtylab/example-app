@@ -4,7 +4,7 @@ This example app is a simple `React` / `TypeScript` frontend.
 
 The only code is a simple component that renders EQTY's: `eqty-agent-policy-plane`.
 
-See the code: [main.tsx](./src/App.tsx)
+See the code: [App.tsx](./src/App.tsx)
 
 ## Before Running
 
