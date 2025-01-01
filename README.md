@@ -16,6 +16,7 @@ GitHub: [eqty-agent-policy-plane](https://github.com/eqtylab/eqty-policy-plane)
 git clone https://github.com/eqty-io/eqty-agent-policy-plane.git
 cd eqty-agent-policy-plane
 npm install
+npm run build
 npm link
 ```
 
