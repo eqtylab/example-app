@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Modal, Button, Container } from "react-bootstrap";
-import { AgentPolicyPlane } from "eqty-agent-policy-plane";
-import "eqty-agent-policy-plane/dist/styles.css";
+import { Modal, Container } from "react-bootstrap";
+import { AgentPolicyPlaneApplication } from "eqty-agent-policy-plane";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import "eqty-agent-policy-plane/dist/styles.css";
 
 const customStyles = `
   .transparent-modal  {
@@ -31,15 +32,15 @@ const ModalWrapper = () => (
     contentClassName="transparent-modal"
     backdropClassName="transparent-modal"
   >
-    <Modal.Body style={{ height: "80vh" }}>
-      <AgentPolicyPlane />
+    <Modal.Body style={{ height: "100vh" }}>
+      <AgentPolicyPlaneApplication />
     </Modal.Body>
   </Modal>
 );
 function App() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal] = useState(true);
 
-  const handleShow = () => setShowModal(true);
+  // const handleShow = () => setShowModal(true);
   // const handleClose = () => setShowModal(false);
 
   return (
@@ -62,9 +63,9 @@ function App() {
           padding: "20px",
         }}
       >
-        <Button variant="primary" size="lg" onClick={handleShow}>
+        {/* <Button variant="primary" size="lg" onClick={handleShow}>
           Open Agent Policy Plane
-        </Button>
+        </Button> */}
 
         {showModal && <ModalWrapper />}
       </Container>
