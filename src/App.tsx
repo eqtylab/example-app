@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Container } from "react-bootstrap";
 import { AgentPolicyPlaneApplication } from "eqty-agent-policy-plane";
+import { AgentProvisionCertificate } from "eqty-agent-policy-plane";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "eqty-agent-policy-plane/dist/styles.css";
 
 const customStyles = `
-  .transparent-modal  {
+   .transparent-modal  {
     background-color: transparent;
     background: transparent;
     border: none;
@@ -17,31 +18,69 @@ const customStyles = `
     width: 98vw;
     margin: 0 auto;
   }
+
+
+
+  .custom-modal-backdrop {
+    background-image: url("/gradientbg.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
 `;
 
-const ModalWrapper = () => (
+const ModalWrapper = ({
+  showMe,
+  setShowMe,
+}: {
+  showMe: boolean;
+  setShowMe: (to: boolean) => void;
+}) => (
   <Modal
-    style={{
-      background: "transparent",
-      backgroundColor: "transparent",
-    }}
-    show={true}
-    size="xl"
+    show={showMe}
+    fullscreen
+    backdrop="static"
+    data-bs-theme="dark"
     centered
-    dialogClassName="wide-modal"
-    contentClassName="transparent-modal"
-    backdropClassName="transparent-modal"
+    className="text-light"
+    onHide={() => setShowMe(false)}
+    dialogClassName="custom-modal-backdrop"
+    backdropClassName="custom-modal-backdrop"
+    contentClassName="custom-modal-backdrop"
   >
-    <Modal.Body style={{ height: "100vh" }}>
+    <Modal.Header>EQTY Compliance Grid</Modal.Header>
+    <Modal.Body>
       <AgentPolicyPlaneApplication />
     </Modal.Body>
   </Modal>
 );
 function App() {
-  const [showModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [showCertificate, setShowCertificate] = useState(false);
 
-  // const handleShow = () => setShowModal(true);
-  // const handleClose = () => setShowModal(false);
+  //  on ctrl+shift+c, show the certificate
+
+  useEffect(() => {
+    // Define the named callback
+    const handleKeyDown = (e: KeyboardEvent) => {
+      console.log("ypou");
+      console.log(e.ctrlKey, e.shiftKey, e.key);
+      // Check if user pressed Ctrl+Shift+C
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") {
+        console.log("yep");
+        setShowCertificate((prev) => !prev);
+      }
+    };
+
+    // Add the listener
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup properly by removing the *same* listener
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <>
@@ -51,23 +90,27 @@ function App() {
         fluid
         style={{
           minHeight: "100vh",
-          backgroundImage: `url("/gradientbg.svg")`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          minWidth: "100vw",
+          backgroundColor: "#09090B",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "20px",
         }}
       >
-        {/* <Button variant="primary" size="lg" onClick={handleShow}>
-          Open Agent Policy Plane
-        </Button> */}
-
-        {showModal && <ModalWrapper />}
+        {showCertificate && <AgentProvisionCertificate />}
+        <ModalWrapper
+          showMe={!showCertificate && showModal}
+          setShowMe={setShowModal}
+        />
+        {!showModal && !showCertificate && (
+          <button
+            className="btn btn-secondary"
+            onClick={() => setShowModal(true)}
+          >
+            Open Modal
+          </button>
+        )}
       </Container>
     </>
   );
