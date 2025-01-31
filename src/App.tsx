@@ -108,7 +108,7 @@ function App() {
             className="btn btn-secondary"
             onClick={() => setShowModal(true)}
           >
-            Open Modal
+            Initiate Agentic Workflow{" "}
           </button>
         )}
       </Container>
